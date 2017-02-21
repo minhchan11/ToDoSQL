@@ -9,6 +9,7 @@ else
     @foreach (var task in Model)
     {
       <li>@task.GetDescription()</li>
+        <ul><li>@task.GetDate().ToShortDateString()</li></ul>
     }
   </ul>
   <form action="/tasks/delete" method="post">

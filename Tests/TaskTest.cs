@@ -27,7 +27,7 @@ namespace ToDoList
     public void Test_Equal_ReturnsTrueIfDescriptionAreTheSame()
     {
       //Arrange, Act
-      Date myDate = new Date(1999,6,4);
+      DateTime myDate = new DateTime(1999,6,4);
       Task firstTask = new Task("Mow the lawn", 1, myDate);
       Task secondTask = new Task("Mow the lawn", 1, myDate);
 
@@ -39,7 +39,7 @@ namespace ToDoList
     public void Test_Save_SavesToDatabase()
     {
       //Arrange
-      Date myDate = new Date(1999,6,4);
+      DateTime myDate = new DateTime(1999,6,4);
       Task testTask = new Task("Mow the lawn", 1, myDate);
 
       //Act
@@ -55,7 +55,7 @@ namespace ToDoList
     public void Test_Save_AssignIdToObject()
     {
       //Arrange
-      Date myDate = new Date(1999,6,4);
+      DateTime myDate = new DateTime(1999,6,4);
       Task testTask = new Task("Mow the lawn", 1, myDate);
 
       //Act
@@ -73,7 +73,7 @@ namespace ToDoList
     public void Test_Find_FindsTaskInDatabase()
     {
       //Arrange
-      Date myDate = new Date(1999,6,4);
+      DateTime myDate = new DateTime(1999,6,4);
       Task testTask = new Task("Mow the lawn", 1, myDate);
       testTask.Save();
 

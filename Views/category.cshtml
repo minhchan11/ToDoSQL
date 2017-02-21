@@ -10,6 +10,7 @@ else
     @foreach (var task in @Model["tasks"])
     {
       <li>@task.GetDescription()</li>
+      <ul><li>@task.GetDate().ToShortDateString()</li></ul>
     }
   </ol>
 }

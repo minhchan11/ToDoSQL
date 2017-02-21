@@ -9,9 +9,9 @@ namespace ToDoList
     private int _id;
     private string _description;
     private int _categoryId;
-    private Date _date;
+    private DateTime _date;
 
-    public Task(string Description, int categoryId, Date date, int Id = 0)
+    public Task(string Description, int categoryId, DateTime date, int Id = 0)
     {
       _id = Id;
       _description = Description;
@@ -46,7 +46,7 @@ namespace ToDoList
       return _categoryId;
     }
 
-    public Date GetDate()
+    public DateTime GetDate()
     {
       return _date;
     }
@@ -68,7 +68,7 @@ namespace ToDoList
        SqlConnection conn = DB.Connection();
        conn.Open();
 
-       SqlCommand cmd = new SqlCommand("SELECT * FROM tasks;", conn);
+       SqlCommand cmd = new SqlCommand("SELECT * FROM tasks ORDER BY cast([date] as datetime) asc;", conn);
        SqlDataReader rdr = cmd.ExecuteReader();
 
        while(rdr.Read())
@@ -76,7 +76,7 @@ namespace ToDoList
          int taskId = rdr.GetInt32(0);
          string taskDescription = rdr.GetString(1);
          int categoryId = rdr.GetInt32(2);
-         Date taskDate = rdr.GetDateTime(3);
+         DateTime taskDate = rdr.GetDateTime(3);
          Task newTask = new Task(taskDescription, categoryId, taskDate, taskId);
          allTasks.Add(newTask);
        }
@@ -159,7 +159,7 @@ namespace ToDoList
       int foundTaskId = 0;
       string foundTaskDescription = null;
       int foundCategoryId = 0;
-      Date foundDate = (0,0,0);
+      DateTime foundDate = new DateTime();
 
       while(rdr.Read())
       {
