@@ -152,5 +152,41 @@ namespace ToDoList
        return foundCategory;
      }
 
+     public List<Task> GetTask()
+     {
+       SqlConnection conn = DB.Connection();
+       conn.Open();
+
+       SqlCommand cmd = new SqlCommand("SELECT * FROM tasks where category_id = @CategoryId;",conn);
+
+       SqlParameter CategoryIdParameter = new SqlParameter();
+       CategoryIdParameter.ParameterName = "@CategoryId";
+       CategoryIdParameter.Value = this.GetId();
+       cmd.Parameters.Add(CategoryIdParameter);
+       SqlDataReader rdr = cmd.ExecuteReader();
+
+       List<Task> tasks = new List<Task>{};
+
+       while(rdr.Read())
+       {
+         int foundTaskId = rdr.GetInt32(0);
+         string foundTaskDescription = rdr.GetString(1);
+         int foundCategoryId = rdr.GetInt32(2);
+         Task newTask = new Task(foundTaskDescription,foundCategoryId,foundTaskId);
+         tasks.Add(newTask);
+       }
+
+       if (rdr != null)
+       {
+         rdr.Close();
+       }
+       if (conn != null)
+       {
+         conn.Close();
+       }
+
+       return tasks;
+     }
+
   }
 }
