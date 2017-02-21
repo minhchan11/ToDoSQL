@@ -41,14 +41,14 @@ namespace ToDoList
       //Arrange
       DateTime myDate = new DateTime(1999,6,4);
       Task testTask = new Task("Mow the lawn", 1, myDate);
+      testTask.Save();
 
       //Act
-      testTask.Save();
       List<Task> result = Task.GetAll();
-      // List<Task> testList = new List<Task>{testTask};
+      List<Task> testList = new List<Task>{testTask};
 
       //Assert
-      Assert.Equal(testTask.GetId(), result[0].GetId());
+      Assert.Equal(testList, result);
     }
 
     [Fact]
